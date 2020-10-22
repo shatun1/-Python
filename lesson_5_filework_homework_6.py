@@ -1,23 +1,15 @@
-new_file = open('my_file_6.txt', 'r+', encoding='utf-8')
+new_file = open('my_file_6.txt', 'r', encoding='utf-8')
 finaly_dict = {}
-content = new_file.readlines(1)
+content = new_file.readlines()
 for line in content:
-    numbers_1 = []
     line = line.split()
     for word in line:
         word = word.replace('(лаб)', ' ')
         word = word.replace('(лекц)', ' ')
         word = word.replace('(пр)', ' ')
+        line = line.replace(':', ' ')
         word = word.split()
-        # print(word)
-        for el in word:
-            if el.isdigit():
-                el = int(el)
-                numbers_1.append(el)
-    finaly_dict = finaly_dict(line[0], sum(numbers_1))
-    print(finaly_dict)
-
-
-
-
-
+        name = line[0]
+        numbers = [int(el) for el in word if el.isdigit()]
+        finaly_dict.update({name: sum(numbers)})
+print(finaly_dict)
