@@ -1,34 +1,26 @@
 class Matrix:
-    def __init__(self, list_1, list_2):
-        self.matr = [list_1, list_2]
-        self.list_1 = list_1
-        self.list_2 = list_2
+    def __init__(self, matr):
+        self.matr = matr
+        # self.list_1 = list_1
+        # self.list_2 = list_2
 
-    def __add__(self):
-        matr = [[0, 0, 0],
-                [0, 0, 0],
-                [0, 0, 0]]
+    def __add__(self, other):
+        matr_sum_list = []
 
-        for i in range(len(self.list_1)):
+        for i in range(len(self.matr)):
+            matr_sum_list.append([])
+            for j in range(len(other.matr[i])):
+                matr_sum_list[i].append(self.matr[i][j] + other.matr[i][j])
 
-            for j in range(len(self.list_2[i])):
-                matr[i][j] = self.list_1[i][j] + self.list_2[i][j]
-
-        return str('\n'.join(['\t'.join([str(j) for j in i]) for i in matr]))
-
+        return str('\n'.join(['\t'.join([str(j) for j in i]) for i in matr_sum_list]))
 
     def __str__(self):
         return str('\n'.join(['\t'.join([str(j) for j in i]) for i in self.matr]))
 
 
-
-matrix_ = Matrix([[5, 18, 11],
-                    [6, 17, 23],
-                    [41, 50, 9]],
-                   [[45, 8, 2],
-                    [6, 7, 93],
-                    [24, 5, 97]])
-# result = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
-
-
-print(matrix_.__add__())
+list_1 = [[1, 2, 11], [2, 4, 3], [23, 0, 11]]
+list_2 = [[57, 67, 2], [4, 53, 87], [4, 65, 12]]
+matrix_1 = Matrix(list_1)
+matrix_2 = Matrix(list_2)
+print(f'Первая матрица:\n{matrix_1}\n{"*" * 100}.\nВторая матрица:\n{matrix_2}\n{"*" * 100}')
+print(f'Сумма матриц:\n{matrix_1 + matrix_2}\n{"*" * 100}')
